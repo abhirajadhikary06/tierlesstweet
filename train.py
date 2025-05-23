@@ -16,20 +16,21 @@ def build_prompt(user_prompt, tick_level):
     if tick_level == "no tick":
         return (
             f"{user_prompt}\n\n"
-            "Use bullet points. Make sure the content is concise, complete, "
-            "and fits within 280 characters without looking cut off."
+            "Craft a concise, slightly premium and engaging tweet that conveys the message clearly in under 280 characters. "
+            "Avoid complex language and ensure the tweet looks complete, not cut off."
         )
     elif tick_level == "blue tick":
         return (
             f"{user_prompt}\n\n"
-            "Use bullet points. Make it a premium, detailed post with professional tone. "
-            "Limit content to 2500 characters max, complete without cut offs."
+            "Write a high-quality, professional tweet thread or post with a polished tone. "
+            "Ensure clarity, insight, and completeness within a 2500-character limit. "
+            "Maintain a balance between value and readability."
         )
     elif tick_level == "golden tick":
         return (
             f"{user_prompt}\n\n"
-            "Use bullet points. Make it very premium, professional, and in-depth. "
-            "No character limit. Content should be polished, comprehensive, and complete."
+            "Create a premium, in-depth, and expertly written post suitable for high-profile or brand-level accounts. "
+            "There is no character limit, so focus on delivering comprehensive, authoritative, and refined content that fully explores the topic."
         )
     else:
         return None

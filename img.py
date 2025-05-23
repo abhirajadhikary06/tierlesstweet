@@ -8,7 +8,7 @@ token = os.getenv("HF_TOKEN")
 
 client = InferenceClient(token=token)
 
-img_description = "Write a short and engaging tweet about a project that uses polynomial regression in machine learning. make the post with bulletpoints. make an image for this content"
+img_description = "Generate an image of an engaging tweet about a project that uses polynomial regression in machine learning. make the post with bulletpoints. make an image for this content"
 
 image = client.text_to_image(img_description)
 

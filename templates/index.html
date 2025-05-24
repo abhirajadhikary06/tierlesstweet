@@ -17,8 +17,16 @@
                     <img src="static/logo.png" alt="TierlessTweet Logo" class="logo-image">
                     <span class="text-2xl font-bold text-white">tierlesstweet</span>
                 </div>
-                
-                <nav class="hidden md:flex items-center space-x-8">
+
+                <!-- Hamburger button for mobile -->
+                <button id="nav-toggle" class="md:hidden flex items-center px-2 py-1 border border-[#FD5C70] rounded text-[#FD5C70] focus:outline-none" aria-label="Open Menu">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+
+                <!-- Nav: visible on desktop, hidden on mobile -->
+                <nav id="main-nav" class="hidden md:flex items-center space-x-8">
                     <b><a href="https://github.com/abhirajadhikary06/tierlesstweet/blob/main/README.md" class="text-gray-300 hover:text-white transition">Readme.md</a></b>
                     <b><a href="https://chat.whatsapp.com/JbALaLcvsHI1d5yo3k5D3N" class="text-gray-300 hover:text-white transition">Join Us</a></b>
                     <a href="https://github.com/abhirajadhikary06" class="inline-block group relative">
@@ -28,14 +36,15 @@
                         </span>
                     </a>
                     <a href="https://github.com/anikchand461" class="inline-block group relative">
-                        <img src="{{ url_for('static', filename='avatar2.jpg') }}" alt="Avatar 1" class="w-8 h-8 rounded-full border-2 border-gray-600 hover:border-white transition">
+                        <img src="{{ url_for('static', filename='avatar2.jpg') }}" alt="Avatar 2" class="w-8 h-8 rounded-full border-2 border-gray-600 hover:border-white transition">
                         <span class="absolute left-1/2 -translate-x-1/2 top-10 px-2 py-1 rounded bg-black text-white text-xs opacity-0 group-hover:opacity-100 transition pointer-events-none whitespace-nowrap z-10">
                             anikchand461
                         </span>
                     </a>
                 </nav>
-                
-                <div class="flex items-center space-x-4">
+
+                <!-- Hide these buttons on mobile -->
+                <div class="hidden md:flex items-center space-x-4">
                     <a href="https://github.com/abhirajadhikary06/tierlesstweet" class="btn-outline">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="vertical-align: -0.125em; margin-right: 0.25rem;">
                             <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
@@ -51,6 +60,29 @@
                     </a>
                 </div>
             </div>
+            <!-- Mobile nav: hidden on desktop, shown on mobile when toggled -->
+            <nav id="mobile-nav" class="md:hidden hidden flex-col mt-4 space-y-4 items-center text-center">
+                <div class="flex flex-col gap-2 items-center">
+                    <b><a href="https://github.com/abhirajadhikary06/tierlesstweet/blob/main/README.md" class="text-gray-300 hover:text-white transition block">Readme.md</a></b>
+                    <b><a href="https://chat.whatsapp.com/JbALaLcvsHI1d5yo3k5D3N" class="text-gray-300 hover:text-white transition block">Join Us</a></b>
+                </div>
+                <div class="flex items-center justify-center space-x-4">
+                    <a href="https://github.com/abhirajadhikary06" class="inline-block group relative">
+                        <img src="{{ url_for('static', filename='avatar1.png') }}" alt="Avatar 1" class="w-14 h-14 rounded-full border-2 border-gray-600 hover:border-white transition">
+                    </a>
+                    <a href="https://github.com/anikchand461" class="inline-block group relative">
+                        <img src="{{ url_for('static', filename='avatar2.jpg') }}" alt="Avatar 2" class="w-14 h-14 rounded-full border-2 border-gray-600 hover:border-white transition">
+                    </a>
+                </div>
+                <div class="flex flex-col gap-2 items-center w-full">
+                    <a href="https://github.com/abhirajadhikary06/tierlesstweet" class="btn-outline w-4/5 justify-center flex">
+                        GitHub
+                    </a>
+                    <a href="https://open-launch.com/projects/tierlesstweet" class="btn-outline w-4/5 justify-center flex">
+                        Open Launch
+                    </a>
+                </div>
+            </nav>
         </div>
     </header>
 
@@ -233,6 +265,19 @@
                     document.body.removeChild(link);
                 });
         }
+
+        // Hamburger menu toggle with animation
+        const navToggle = document.getElementById('nav-toggle');
+        const mobileNav = document.getElementById('mobile-nav');
+        navToggle.addEventListener('click', () => {
+            if (mobileNav.classList.contains('hidden')) {
+                mobileNav.classList.remove('hidden');
+                mobileNav.classList.add('mobile-nav-animate');
+            } else {
+                mobileNav.classList.add('hidden');
+                mobileNav.classList.remove('mobile-nav-animate');
+            }
+        });
     </script>
 </body>
 </html>

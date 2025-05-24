@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TierlessTweet</title>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}?v=1" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-lg border-b border-gray-800">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="logo-container">
+                    <img src="static/logo.png" alt="TierlessTweet Logo" class="logo-image">
+                    <span class="text-2xl font-bold text-white">tierlesstweet</span>
+                </div>
+                
+                <nav class="hidden md:flex items-center space-x-8">
+                    <b><a href="https://github.com/abhirajadhikary06/tierlesstweet/blob/main/README.md" class="text-gray-300 hover:text-white transition">Readme.md</a></b>
+                    <b><a href="https://chat.whatsapp.com/JbALaLcvsHI1d5yo3k5D3N" class="text-gray-300 hover:text-white transition">Join Us</a></b>
+                    <a href="https://github.com/abhirajadhikary06" class="inline-block group relative">
+                        <img src="{{ url_for('static', filename='avatar1.png') }}" alt="Avatar 1" class="w-8 h-8 rounded-full border-2 border-gray-600 hover:border-white transition">
+                        <span class="absolute left-1/2 -translate-x-1/2 top-10 px-2 py-1 rounded bg-black text-white text-xs opacity-0 group-hover:opacity-100 transition pointer-events-none whitespace-nowrap z-10">
+                            abhirajadhikary06
+                        </span>
+                    </a>
+                    <a href="https://github.com/anikchand461" class="inline-block group relative">
+                        <img src="{{ url_for('static', filename='avatar2.jpg') }}" alt="Avatar 1" class="w-8 h-8 rounded-full border-2 border-gray-600 hover:border-white transition">
+                        <span class="absolute left-1/2 -translate-x-1/2 top-10 px-2 py-1 rounded bg-black text-white text-xs opacity-0 group-hover:opacity-100 transition pointer-events-none whitespace-nowrap z-10">
+                            anikchand461
+                        </span>
+                    </a>
+                </nav>
+                
+                <div class="flex items-center space-x-4">
+                    <a href="https://github.com/abhirajadhikary06/tierlesstweet" class="btn-outline">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="vertical-align: -0.125em; margin-right: 0.25rem;">
+                            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                        </svg>
+                        GitHub
+                    </a>
+                    <a href="https://open-launch.com/projects/tierlesstweet" class="btn-outline">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 32 32" fill="none" style="vertical-align: -0.125em; margin-right: 0.25rem;">
+                            <circle cx="16" cy="18" r="12" stroke="currentColor" stroke-width="6" fill="none"/>
+                            <circle cx="16" cy="16" r="7" fill="none"/>
+                        </svg>
+                        Open Launch
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="pt-20 pb-20 px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <!-- Version Badge -->
+<div class="flex justify-center mb-8">
+    <div class="version-badge">
+        <img src="/static/logo.png" alt="Logo" class="version-logo">
+        <span id="animated-text"></span>
+    </div>
+</div>
+
+
+            <!-- Title -->
+<h1 class="text-6xl md:text-7xl font-extrabold mb-6 bg-gradient-to-r from-white to-[#FD5C70] text-transparent bg-clip-text">
+    Tweet Post Generator
+</h1>
+
+            
+            <!-- Subtitle -->
+            <p class="text-xl text-gray-400 max-w-3xl mx-auto mb-12 leading-relaxed">
+                Empowering developers with AI-powered tweet generation that creates professional and engaging posts for your social media platforms.
+            </p>
+
+            <!-- Form Card -->
+            <div class="max-w-2xl mx-auto">
+                <div class="main-card p-8 rounded-lg shadow-md">
+                    <form method="POST" class="space-y-4">
+                        <div>
+                            <label for="prompt" class="block text-sm font-medium text-gray-300 mb-2">Enter Keywords</label>
+                            <input type="text" name="prompt" id="prompt" required
+                                   class="form-input mt-1 block w-full p-3 rounded-md"
+                                   placeholder="e.g., motivation, success, tech">
+                        </div>
+                        <div>
+                            <label for="tick_level" class="block text-sm font-medium text-gray-300 mb-2">Select Tier</label>
+<div class="relative inline-block w-full">
+  <button id="dropdownBtn" type="button"
+          class="w-full bg-[#0a0a0a] border border-[#FD5C70] text-[#FD5C70] p-3 rounded-md font-semibold flex justify-between items-center">
+    <span id="selectedValue" class="text-[#FD5C70]">No Tick</span>
+    <svg class="w-5 h-5 ml-2" fill="#FD5C70" viewBox="0 0 20 20">
+      <path d="M5.5 7l4.5 4.5L14.5 7z"/>
+    </svg>
+  </button>
+
+  <ul id="dropdownMenu" class="absolute z-10 hidden w-full bg-[#0a0a0a] border border-[#FD5C70] mt-1 rounded-md shadow-md">
+    <li class="p-3 cursor-pointer text-[#FD5C70] hover:bg-[#311013]" data-value="no tick">No Tick</li>
+    <li class="p-3 cursor-pointer flex items-center gap-2 text-[#FD5C70] hover:bg-[#311013]" data-value="blue tick">
+      <img src="{{ url_for('static', filename='bluetick.png') }}" alt="Blue Tick" class="w-5 h-5"/> Blue Tick
+    </li>
+    <li class="p-3 cursor-pointer flex items-center gap-2 text-[#FD5C70] hover:bg-[#311013]" data-value="golden tick">
+      <img src="{{ url_for('static', filename='goldentick.png') }}" alt="Golden Tick" class="w-5 h-5"/> Golden Tick
+    </li>
+  </ul>
+
+  <input type="hidden" name="tick_level" id="tick_level" value="no tick" />
+</div>
+
+
+                        </div>
+                        <button type="submit"
+                                class="btn-primary w-full text-white p-3 rounded-md font-semibold">
+                            Generate Post & Image
+                        </button>
+                    </form>
+
+                    {% if error %}
+                        <div class="mt-4 p-4 bg-red-900/30 border border-red-700/50 text-red-300 rounded-md">
+                            {{ error }}
+                        </div>
+                    {% endif %}
+
+                    {% if content %}
+                        <div class="mt-6">
+                            <h2 class="text-lg font-semibold text-white mb-3">Generated Post</h2>
+                            <p class="mt-2 p-4 bg-gray-800/50 border border-gray-700 rounded-md whitespace-pre-wrap text-gray-300">{{ content }}</p>
+                        </div>
+                    {% endif %}
+
+                    {% if image_url %}
+                        <div class="mt-6">
+                            <h2 class="text-lg font-semibold text-white mb-3">Generated Image</h2>
+                            <div class="image-container">
+                                <button class="download-btn" onclick="downloadImage('{{ image_url }}', 'tierlesstweet-generated-image.png')">
+                                    <svg class="download-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                    </svg>
+                                    Download
+                                </button>
+                                <img src="{{ image_url }}" alt="Generated Image" class="mt-2 w-full rounded-md">
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Typing animation for the version badge only
+        const badgeText = "tierlesstweet";
+        const badgeElement = document.getElementById("animated-text");
+        let badgeIndex = 0;
+        let badgeIsTyping = true;
+
+        function typeBadgeText() {
+            if (badgeIsTyping) {
+                if (badgeIndex < badgeText.length) {
+                    badgeElement.textContent += badgeText.charAt(badgeIndex);
+                    badgeIndex++;
+                    setTimeout(typeBadgeText, 100);
+                } else {
+                    badgeIsTyping = false;
+                    setTimeout(typeBadgeText, 3000);
+                }
+            } else {
+                if (badgeIndex > 0) {
+                    badgeElement.textContent = badgeText.substring(0, badgeIndex - 1);
+                    badgeIndex--;
+                    setTimeout(typeBadgeText, 60);
+                } else {
+                    badgeIsTyping = true;
+                    setTimeout(typeBadgeText, 800);
+                }
+            }
+        }
+
+        // Start animation
+        typeBadgeText();
+
+        const dropdownBtn = document.getElementById('dropdownBtn');
+        const dropdownMenu = document.getElementById('dropdownMenu');
+        const selectedValue = document.getElementById('selectedValue');
+        const hiddenInput = document.getElementById('tick_level');
+
+        dropdownBtn.addEventListener('click', () => {
+            dropdownMenu.classList.toggle('hidden');
+        });
+
+        dropdownMenu.querySelectorAll('li').forEach(item => {
+            item.addEventListener('click', () => {
+                selectedValue.innerHTML = item.innerHTML;
+                hiddenInput.value = item.dataset.value;
+                dropdownMenu.classList.add('hidden');
+            });
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!dropdownBtn.contains(e.target) && !dropdownMenu.contains(e.target)) {
+                dropdownMenu.classList.add('hidden');
+            }
+        });
+
+        // Download image function
+        function downloadImage(imageUrl, filename) {
+            // Create a temporary anchor element
+            const link = document.createElement('a');
+            link.href = imageUrl;
+            link.download = filename;
+            link.target = '_blank';
+            
+            // For cross-origin images, we need to convert to blob first
+            fetch(imageUrl)
+                .then(response => response.blob())
+                .then(blob => {
+                    const url = window.URL.createObjectURL(blob);
+                    link.href = url;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    window.URL.revokeObjectURL(url);
+                })
+                .catch(error => {
+                    // Fallback: try direct download
+                    console.log('Fallback download method');
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                });
+        }
+    </script>
+</body>
+</html>
